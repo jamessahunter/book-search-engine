@@ -3,9 +3,18 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async (parent, { username })=> {
-            await User.findOne({ username });
-        }
+        me: async (parent, args, context)=> {
+            console.log("context")
+            console.log(context)
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id }).select(
+                  "-__v -password"
+                );
+                return userData;
+              }
+        
+            //   throw new AuthenticationError("Not logged in");
+    },
     },
 
     Mutation: {
@@ -26,12 +35,14 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        saveBook: async (parent, {UserId, bookId, authors, description, image, link, title }) =>{
+        saveBook: async (parent, { bookId, authors, description, image, link, title }, context) =>{
+            console.log("context")
+            console.log(context)
             return User.findOneAndUpdate(
-                { _id: UserId },
+                { _id: context.user },
                 { $addToSet: { savedBooks: {bookId, authors, description, image, link, title} } },
                 { new: true, runValidators: true }
-            );
+            ).populate("savedBooks");
         },
         removeBook: async (parent, {UserId, bookId}) => {
             return User.findOneAndUpdate(
