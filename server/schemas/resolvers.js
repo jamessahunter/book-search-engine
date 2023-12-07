@@ -33,7 +33,7 @@ const resolvers = {
                 { new: true, runValidators: true }
             );
         },
-        deleteBook: async (parent, {UserId, bookId}) => {
+        removeBook: async (parent, {UserId, bookId}) => {
             return User.findOneAndUpdate(
                 { _id: UserId},
                 { $pull: { savedBooks: { bookId} } },
