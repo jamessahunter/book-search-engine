@@ -7,14 +7,12 @@ const resolvers = {
             console.log("context")
             console.log(context)
             if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id }).select(
-                  "-__v -password"
-                );
+                const userData = await User.findOne({ _id: context.user._id })
                 return userData;
               }
         
-            //   throw new AuthenticationError("Not logged in");
-    },
+              throw new AuthenticationError("Not logged in");
+        },
     },
 
     Mutation: {
@@ -31,6 +29,7 @@ const resolvers = {
             return { token, user }
         },
         addUser: async (parent, {username, email, password}) => {
+            console.log(username, email, password)
             const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
