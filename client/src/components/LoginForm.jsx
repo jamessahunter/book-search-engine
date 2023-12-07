@@ -9,9 +9,11 @@ const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [login] = useMutation(LOGIN_USER, {
-    variables: userFormData,
-  });
+  // const [login] = useMutation(LOGIN_USER, {
+  //   variables: userFormData,
+  // });
+
+  const [login, {error}] = useMutation(LOGIN_USER)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -37,34 +39,12 @@ const LoginForm = () => {
       console.error(e);
     }
 
-    // clear form values
-    setFormState({
-      email: '',
-      password: '',
-    });
-
-    // try {
-    //   const response = await loginUser(userFormData);
-
-    //   if (!response.ok) {
-    //     throw new Error('something went wrong!');
-    //   }
-
-    //   const { token, user } = await response.json();
-    //   console.log(user);
-    //   Auth.login(token);
-    // } catch (err) {
-    //   console.error(err);
-    //   setShowAlert(true);
-    // }
-
     setUserFormData({
-      username: '',
       email: '',
       password: '',
     });
   };
-
+  
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
