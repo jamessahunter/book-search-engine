@@ -24,6 +24,7 @@ const resolvers = {
             return { token, user }
         },
         addUser: async (parent, {username, email, password}) => {
+            console.log(username, email, password)
             const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
@@ -33,7 +34,7 @@ const resolvers = {
                 { _id: context.user._id },
                 { $addToSet: { savedBooks: {bookId, authors, description, image, link, title} } },
                 { new: true, runValidators: true }
-            );
+            ).populate("savedBooks");
         },
         removeBook: async (parent, { bookId }, context) => {
             return User.findOneAndUpdate(
