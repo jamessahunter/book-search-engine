@@ -13,13 +13,9 @@
 
 ## Description
 
-[Link to Deployed Site]()
+[Link to Deployed Site](https://book-search-engine-4npe.onrender.com/)
 
  This project allows the user to search for books. If the user has signed up and is logged in they have the option to save a book. They can then view all their saved books. The user also has the option to remove books from their saved list. This website is a mern stack website meaning it uses MongoDB, Express, React and Node. This site also use GraphQl to communicate between the server and the client to allow for faster speed in fetching data. This site use JSON Web Tokens to authenticate a user when they are logging in or performing other actions on the page. 
-
-## Usage
- 
-![Usage Example](./client/src/images/Text%20Editor.gif)
 
 ## Learning Points
 
