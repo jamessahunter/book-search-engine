@@ -15,9 +15,9 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  // const [userData, setUserData] = useState({});
+  //gets the users info
   const{ loading , data} = useQuery(QUERY_ME);
-
+  //allows the user to remove a book
   const [removeBook, { error }] = useMutation(REMOVE_BOOK,{
     refetchQueries: [
       QUERY_ME,
@@ -37,7 +37,7 @@ const SavedBooks = () => {
 
     try {
 
-      console.log(bookId)
+      //removes the book from that user
       const { data } = await removeBook({
         variables: { bookId },
       })

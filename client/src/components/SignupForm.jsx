@@ -14,7 +14,7 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-
+  //allows for a user to be added
   const [addUser] = useMutation(ADD_USER, {
     variables: userFormData,
   });
@@ -35,7 +35,7 @@ const SignupForm = () => {
     }
 
     try {
-      console.log(userFormData);
+      //creates a new user in the db
       const { data } = await addUser({
         variables: { ...userFormData },
       });

@@ -23,7 +23,7 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
-
+  //allows save book to be used
   const [saveBook, {error}] = useMutation(SAVE_BOOK);
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -40,6 +40,7 @@ const SearchBooks = () => {
     }
 
     try {
+      //gets the searched for book
       const response = await searchGoogleBooks(searchInput);
 
       if (!response.ok) {
@@ -55,7 +56,7 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
-
+      //sets the searched for book to the state
       setSearchedBooks(bookData);
       setSearchInput('');
     } catch (err) {
@@ -76,6 +77,7 @@ const SearchBooks = () => {
     }
 
     try {
+      //adds the saved book the database
       const { data } = await saveBook({
         variables: {...bookToSave}
       })

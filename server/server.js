@@ -4,14 +4,11 @@ const { expressMiddleware } = require('@apollo/server/express4');
 const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-<<<<<<< HEAD
 const path = require('path');
 
-=======
-const { authMiddleware } = require('./utils/auth');
->>>>>>> main
 const PORT = process.env.PORT || 3001;
 const app = express();
+//creates apollo serve with typeDefs and resolvers
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -22,7 +19,7 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-
+//allows the authmiddleware to be used
   app.use('/graphql',expressMiddleware(server, {
     context: authMiddleware
   }))
