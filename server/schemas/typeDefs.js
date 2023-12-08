@@ -1,3 +1,4 @@
+//creates the info that can be returned in a search
 const typeDefs = `
     type User {
         _id:ID!

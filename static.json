@@ -1,0 +1,10 @@
+{
+    "rewrites": [
+      {
+        "source": "*.js",
+        "headers": {
+          "Content-Type": "application/javascript; charset=UTF-8"
+        }
+      }
+    ]
+  }
