@@ -35,12 +35,3 @@ const typeDefs = `
 `
 
 module.exports = typeDefs;
-
-// input saveBookInput{
-//     bookId: String!
-//     authors: [String]
-//     description: String!
-//     image: String
-//     link: String
-//     title: String!
-// }

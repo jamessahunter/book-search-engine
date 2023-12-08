@@ -1,20 +1,21 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-{
-    me {
-        _id
-        username
-        email
-        password
-        bookCount
-        savedBooks{
-            bookId
-            authors
-            description
-            title
-            image
-            link
+    query me  {
+        me {
+            _id
+            username
+            email
+            password
+            bookCount
+            savedBooks{
+                bookId
+                authors
+                description
+                title
+                image
+                link
+            }
         }
     }
 }
