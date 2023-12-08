@@ -4,8 +4,6 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
     Query: {
         me: async (parent, args, context)=> {
-            // console.log("test")
-            // console.log(context)
             if(context.user){
                 return User.findOne({ _id: context.user._id });
             }
@@ -37,9 +35,10 @@ const resolvers = {
                 { new: true, runValidators: true }
             );
         },
-        removeBook: async (parent, {UserId, bookId}) => {
+        removeBook: async (parent, { bookId }, context) => {
+            console.log("test")
             return User.findOneAndUpdate(
-                { _id: UserId},
+                { _id: context.user._id},
                 { $pull: { savedBooks: { bookId} } },
                 { new: true }
               );
